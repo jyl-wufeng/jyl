@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyl.yxczspringboot.icom.fax.mapper.aaMapper">
+  <resultMap id="BaseResultMap" type="com.jyl.yxczspringboot.icom.fax.entity.aa">
+    <id column="name" jdbcType="VARCHAR" property="name" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    name, id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from aa
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from aa
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jyl.yxczspringboot.icom.fax.entity.aa">
+    insert into aa (name, id)
+    values (#{name,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyl.yxczspringboot.icom.fax.entity.aa">
+    insert into aa
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyl.yxczspringboot.icom.fax.entity.aa">
+    update aa
+    <set>
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyl.yxczspringboot.icom.fax.entity.aa">
+    update aa
+    set id = #{id,jdbcType=VARCHAR}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAll" parameterType="com.jyl.yxczspringboot.icom.fax.entity.aa" resultMap="BaseResultMap">
+    select * from aa
+    <where />
+  </select>
+  <select id="queryPage" parameterType="com.fendo.bean.Page" resultMap="BaseResultMap">
+    select * from aa
+  </select>
+</mapper>

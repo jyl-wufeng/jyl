@@ -189,9 +189,9 @@
         $.ajax({
             type: "POST",
             url: "/login",
-            data: "loginName="+loginName+"&loginPass="+loginPass,
-            success: function(msg){
-                layer.msg(msg);
+            data: "loginName="+loginName+"&passWord="+loginPass,
+            success: function(result){
+                layer.msg(result.message);
             },
             error:function(){
                 layer.error("服务器无法连接！")

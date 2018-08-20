@@ -1,0 +1,25 @@
+spring:
+       thymeleaf:
+         cache: true
+         prefix: classpath:/templates/
+         mode: HTML
+         suffix: .html
+         encoding: UTF-8
+         servlet:
+           content-type: text/html
+
+       datasource:
+          username: app
+          password: 123456
+          url: jdbc:mysql://192.168.1.101:3306/yxcz-springboot
+          driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql

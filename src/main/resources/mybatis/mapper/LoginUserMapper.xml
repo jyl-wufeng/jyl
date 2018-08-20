@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyl.yxczspringboot.icom.user.mapper.LoginUserMapper" >
+  <resultMap id="BaseResultMap" type="com.jyl.yxczspringboot.icom.user.entity.LoginUser" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+    <result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+    <result column="EXTEND3" property="extend3" jdbcType="VARCHAR" />
+    <result column="EXTEND4" property="extend4" jdbcType="VARCHAR" />
+    <result column="EXTEND5" property="extend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_NAME, PASSWORD, EMAIL, PHONE, EXTEND1, EXTEND2, EXTEND3, EXTEND4, EXTEND5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from yl_core_user
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from yl_core_user
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jyl.yxczspringboot.icom.user.entity.LoginUser" >
+    insert into yl_core_user (ID, USER_NAME, PASSWORD,
+      EMAIL, PHONE, EXTEND1,
+      EXTEND2, EXTEND3, EXTEND4,
+      EXTEND5)
+    values (#{id,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{extend1,jdbcType=VARCHAR},
+      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR},
+      #{extend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyl.yxczspringboot.icom.user.entity.LoginUser" >
+    insert into yl_core_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="phone != null" >
+        PHONE,
+      </if>
+      <if test="extend1 != null" >
+        EXTEND1,
+      </if>
+      <if test="extend2 != null" >
+        EXTEND2,
+      </if>
+      <if test="extend3 != null" >
+        EXTEND3,
+      </if>
+      <if test="extend4 != null" >
+        EXTEND4,
+      </if>
+      <if test="extend5 != null" >
+        EXTEND5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null" >
+        #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null" >
+        #{extend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyl.yxczspringboot.icom.user.entity.LoginUser" >
+    update yl_core_user
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null" >
+        EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null" >
+        EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null" >
+        EXTEND5 = #{extend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyl.yxczspringboot.icom.user.entity.LoginUser" >
+    update yl_core_user
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      EXTEND5 = #{extend5,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="login" parameterType="com.jyl.yxczspringboot.icom.user.entity.LoginUser" resultType="com.jyl.yxczspringboot.icom.user.entity.LoginUser">
+   select <include refid="Base_Column_List"></include> from yl_core_user where (USER_NAME=#{userName} or EMAIL=#{userName} or PHONE=#{userName} ) and PASSWORD=#{password,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jyl.yxczspringboot.icom.fax.mapper.FaxEntityMapper" >
+  <resultMap id="BaseResultMap" type="com.jyl.yxczspringboot.icom.fax.entity.FaxEntity" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="PERSON_NAME" property="personName" jdbcType="VARCHAR" />
+    <result column="PERSON_ID" property="personId" jdbcType="VARCHAR" />
+    <result column="PERSON_DEPT" property="personDept" jdbcType="VARCHAR" />
+    <result column="PERSON_TEL" property="personTel" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="VARCHAR" />
+    <result column="FAX_TYPE" property="faxType" jdbcType="VARCHAR" />
+    <result column="STATU" property="statu" jdbcType="VARCHAR" />
+    <result column="NO_REASON" property="noReason" jdbcType="VARCHAR" />
+    <result column="IS_TOP" property="isTop" jdbcType="VARCHAR" />
+    <result column="TOP_ENDTIME" property="topEndtime" jdbcType="VARCHAR" />
+    <result column="CLICK_NUMBER" property="clickNumber" jdbcType="VARCHAR" />
+    <result column="SUPPORT_NUM" property="supportNum" jdbcType="VARCHAR" />
+    <result column="NEGATIVE_NUM" property="negativeNum" jdbcType="VARCHAR" />
+    <result column="ACCEPT_NAME" property="acceptName" jdbcType="VARCHAR" />
+    <result column="ACCEPT_NAME_IDS" property="acceptNameIds" jdbcType="VARCHAR" />
+    <result column="PUB_TIME" property="pubTime" jdbcType="VARCHAR" />
+    <result column="ALERT_TIME" property="alertTime" jdbcType="VARCHAR" />
+    <result column="EXTEND1" property="extend1" jdbcType="VARCHAR" />
+    <result column="EXTEND2" property="extend2" jdbcType="VARCHAR" />
+    <result column="EXTEND3" property="extend3" jdbcType="VARCHAR" />
+    <result column="EXTEND4" property="extend4" jdbcType="VARCHAR" />
+    <result column="EXTEND5" property="extend5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TITLE, CONTENT, PERSON_NAME, PERSON_ID, PERSON_DEPT, PERSON_TEL, CREATE_DATE, 
+    FAX_TYPE, STATU, NO_REASON, IS_TOP, TOP_ENDTIME, CLICK_NUMBER, SUPPORT_NUM, NEGATIVE_NUM, 
+    ACCEPT_NAME, ACCEPT_NAME_IDS, PUB_TIME, ALERT_TIME, EXTEND1, EXTEND2, EXTEND3, EXTEND4, 
+    EXTEND5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from mocha_line_fax
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from mocha_line_fax
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.jyl.yxczspringboot.icom.fax.entity.FaxEntity" >
+    insert into mocha_line_fax (ID, TITLE, CONTENT, 
+      PERSON_NAME, PERSON_ID, PERSON_DEPT, 
+      PERSON_TEL, CREATE_DATE, FAX_TYPE, 
+      STATU, NO_REASON, IS_TOP, 
+      TOP_ENDTIME, CLICK_NUMBER, SUPPORT_NUM, 
+      NEGATIVE_NUM, ACCEPT_NAME, ACCEPT_NAME_IDS, 
+      PUB_TIME, ALERT_TIME, EXTEND1, 
+      EXTEND2, EXTEND3, EXTEND4, 
+      EXTEND5)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{personName,jdbcType=VARCHAR}, #{personId,jdbcType=VARCHAR}, #{personDept,jdbcType=VARCHAR}, 
+      #{personTel,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{faxType,jdbcType=VARCHAR}, 
+      #{statu,jdbcType=VARCHAR}, #{noReason,jdbcType=VARCHAR}, #{isTop,jdbcType=VARCHAR}, 
+      #{topEndtime,jdbcType=VARCHAR}, #{clickNumber,jdbcType=VARCHAR}, #{supportNum,jdbcType=VARCHAR}, 
+      #{negativeNum,jdbcType=VARCHAR}, #{acceptName,jdbcType=VARCHAR}, #{acceptNameIds,jdbcType=VARCHAR}, 
+      #{pubTime,jdbcType=VARCHAR}, #{alertTime,jdbcType=VARCHAR}, #{extend1,jdbcType=VARCHAR}, 
+      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}, 
+      #{extend5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jyl.yxczspringboot.icom.fax.entity.FaxEntity" >
+    insert into mocha_line_fax
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="personName != null" >
+        PERSON_NAME,
+      </if>
+      <if test="personId != null" >
+        PERSON_ID,
+      </if>
+      <if test="personDept != null" >
+        PERSON_DEPT,
+      </if>
+      <if test="personTel != null" >
+        PERSON_TEL,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="faxType != null" >
+        FAX_TYPE,
+      </if>
+      <if test="statu != null" >
+        STATU,
+      </if>
+      <if test="noReason != null" >
+        NO_REASON,
+      </if>
+      <if test="isTop != null" >
+        IS_TOP,
+      </if>
+      <if test="topEndtime != null" >
+        TOP_ENDTIME,
+      </if>
+      <if test="clickNumber != null" >
+        CLICK_NUMBER,
+      </if>
+      <if test="supportNum != null" >
+        SUPPORT_NUM,
+      </if>
+      <if test="negativeNum != null" >
+        NEGATIVE_NUM,
+      </if>
+      <if test="acceptName != null" >
+        ACCEPT_NAME,
+      </if>
+      <if test="acceptNameIds != null" >
+        ACCEPT_NAME_IDS,
+      </if>
+      <if test="pubTime != null" >
+        PUB_TIME,
+      </if>
+      <if test="alertTime != null" >
+        ALERT_TIME,
+      </if>
+      <if test="extend1 != null" >
+        EXTEND1,
+      </if>
+      <if test="extend2 != null" >
+        EXTEND2,
+      </if>
+      <if test="extend3 != null" >
+        EXTEND3,
+      </if>
+      <if test="extend4 != null" >
+        EXTEND4,
+      </if>
+      <if test="extend5 != null" >
+        EXTEND5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null" >
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null" >
+        #{personId,jdbcType=VARCHAR},
+      </if>
+      <if test="personDept != null" >
+        #{personDept,jdbcType=VARCHAR},
+      </if>
+      <if test="personTel != null" >
+        #{personTel,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="faxType != null" >
+        #{faxType,jdbcType=VARCHAR},
+      </if>
+      <if test="statu != null" >
+        #{statu,jdbcType=VARCHAR},
+      </if>
+      <if test="noReason != null" >
+        #{noReason,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=VARCHAR},
+      </if>
+      <if test="topEndtime != null" >
+        #{topEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNumber != null" >
+        #{clickNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="supportNum != null" >
+        #{supportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="negativeNum != null" >
+        #{negativeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptName != null" >
+        #{acceptName,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptNameIds != null" >
+        #{acceptNameIds,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTime != null" >
+        #{pubTime,jdbcType=VARCHAR},
+      </if>
+      <if test="alertTime != null" >
+        #{alertTime,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null" >
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null" >
+        #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null" >
+        #{extend5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jyl.yxczspringboot.icom.fax.entity.FaxEntity" >
+    update mocha_line_fax
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="personName != null" >
+        PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="personId != null" >
+        PERSON_ID = #{personId,jdbcType=VARCHAR},
+      </if>
+      <if test="personDept != null" >
+        PERSON_DEPT = #{personDept,jdbcType=VARCHAR},
+      </if>
+      <if test="personTel != null" >
+        PERSON_TEL = #{personTel,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="faxType != null" >
+        FAX_TYPE = #{faxType,jdbcType=VARCHAR},
+      </if>
+      <if test="statu != null" >
+        STATU = #{statu,jdbcType=VARCHAR},
+      </if>
+      <if test="noReason != null" >
+        NO_REASON = #{noReason,jdbcType=VARCHAR},
+      </if>
+      <if test="isTop != null" >
+        IS_TOP = #{isTop,jdbcType=VARCHAR},
+      </if>
+      <if test="topEndtime != null" >
+        TOP_ENDTIME = #{topEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNumber != null" >
+        CLICK_NUMBER = #{clickNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="supportNum != null" >
+        SUPPORT_NUM = #{supportNum,jdbcType=VARCHAR},
+      </if>
+      <if test="negativeNum != null" >
+        NEGATIVE_NUM = #{negativeNum,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptName != null" >
+        ACCEPT_NAME = #{acceptName,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptNameIds != null" >
+        ACCEPT_NAME_IDS = #{acceptNameIds,jdbcType=VARCHAR},
+      </if>
+      <if test="pubTime != null" >
+        PUB_TIME = #{pubTime,jdbcType=VARCHAR},
+      </if>
+      <if test="alertTime != null" >
+        ALERT_TIME = #{alertTime,jdbcType=VARCHAR},
+      </if>
+      <if test="extend1 != null" >
+        EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null" >
+        EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null" >
+        EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null" >
+        EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null" >
+        EXTEND5 = #{extend5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jyl.yxczspringboot.icom.fax.entity.FaxEntity" >
+    update mocha_line_fax
+    set TITLE = #{title,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      PERSON_NAME = #{personName,jdbcType=VARCHAR},
+      PERSON_ID = #{personId,jdbcType=VARCHAR},
+      PERSON_DEPT = #{personDept,jdbcType=VARCHAR},
+      PERSON_TEL = #{personTel,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=VARCHAR},
+      FAX_TYPE = #{faxType,jdbcType=VARCHAR},
+      STATU = #{statu,jdbcType=VARCHAR},
+      NO_REASON = #{noReason,jdbcType=VARCHAR},
+      IS_TOP = #{isTop,jdbcType=VARCHAR},
+      TOP_ENDTIME = #{topEndtime,jdbcType=VARCHAR},
+      CLICK_NUMBER = #{clickNumber,jdbcType=VARCHAR},
+      SUPPORT_NUM = #{supportNum,jdbcType=VARCHAR},
+      NEGATIVE_NUM = #{negativeNum,jdbcType=VARCHAR},
+      ACCEPT_NAME = #{acceptName,jdbcType=VARCHAR},
+      ACCEPT_NAME_IDS = #{acceptNameIds,jdbcType=VARCHAR},
+      PUB_TIME = #{pubTime,jdbcType=VARCHAR},
+      ALERT_TIME = #{alertTime,jdbcType=VARCHAR},
+      EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      EXTEND5 = #{extend5,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 查询未答复，答复的发言信息 （首页展示发言）首页  -->
+  <select id="selectByMap" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    select t.id,t.title,t.content,t.person_name,t.person_id,t.person_dept,t.person_tel,t.create_date,t.fax_type,t.statu,t.no_reason,t.is_top,
+    t.top_endtime,t.click_number,t.support_num,t.negative_num,t.accept_name,t.accept_name_ids,t.pub_time,t.alert_time,extend1 ,extend2,extend3,extend4,extend5
+    ,case when t.IS_TOP='Y' and date_format(TOP_ENDTIME,'%Y-%m-%d')>NOW() then 'Y' else 'N' end top
+    ,case when t.IS_TOP='Y' and date_format(TOP_ENDTIME,'%Y-%m-%d')>NOW() then 0 else t.STATU end statutop<!-- ,
+(select count(1) from MOCHA_FAX_REVIEW where  fax_id=t.id  and review_type='1') dfunum,
+(select count(1) from MOCHA_FAX_REVIEW where  fax_id=t.id  and review_type='0') plnum -->
+    from MOCHA_LINE_FAX t
+    <where>
+     <if test="statu!=null">
+     AND t.statu in
+       <foreach item="item" index="index" collection="statu"
+                open="(" separator="," close=")">
+         #{item}
+       </foreach>
+    </if>
+      <if test="statu!=null">
+        AND t.id = #id:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.title like  CONCAT('%',#title:VARCHAR#,'%')
+      </if>
+      <if test="statu!=null">
+        AND t.content like   CONCAT('%',#content:VARCHAR#,'%')
+      </if>
+      <if test="statu!=null">
+        AND t.person_name = #person_name:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.person_id = #person_id:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.person_dept like  CONCAT('%',#person_dept:VARCHAR#,'%')
+      </if>
+      <if test="statu!=null">
+        AND t.person_tel = #person_tel:VARCHAR#
+      </if>
+
+      <if test="statu!=null">
+        AND (	t.person_name   like  CONCAT('%',#search:VARCHAR#,'%')
+      or t.title     like  CONCAT('%',#search:VARCHAR#,'%')
+      or t.person_dept   like  CONCAT('%',#search:VARCHAR#,'%')
+      or t.pub_time      like  CONCAT('%',#search:VARCHAR#,'%')
+      )
+      </if>
+
+      <if test="statu!=null">
+        AND date_format(t.pub_time, '%Y-%m-%d') >= date_format(#create_date_start:VARCHAR#, '%Y-%m-%d')
+      </if>
+      <if test="statu!=null">
+        AND date_format(t.pub_time, '%Y-%m-%d') <![CDATA[ <= ]]> date_format(#create_date_end:VARCHAR#, '%Y-%m-%d')
+      </if>
+      <if test="statu!=null">
+        AND t.fax_type = #fax_type:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.statu = #statu:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.no_reason = #no_reason:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.is_top = #is_top:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.top_endtime = #top_endtime:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.click_number = #click_number:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.support_num = #support_num:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.negative_num = #negative_num:VARCHAR#
+      </if>
+      <if test="statu!=null">
+        AND t.accept_name like CONCAT('%',#accept_name:VARCHAR#,'%')
+      </if>
+      <if test="statu!=null">
+        AND t.accept_name_ids like CONCAT('%',#accept_name_ids:VARCHAR#,'%')
+      </if>
+    </where>
+    order by
+    <!-- 	<isNotNull  property="orderbyid">
+        FIELD(`id`, #orderbyid:VARCHAR#) desc ,
+       </isNotNull> -->
+    top desc,	FIELD(t.STATU, '1', '9', '2') , extend2 ,t.pub_time desc
+
+  </select>
+</mapper>
