@@ -7,16 +7,9 @@ import java.util.List;
  
 import static org.mybatis.generator.internal.util.StringUtility.stringHasValue;
 import static org.mybatis.generator.internal.util.messages.Messages.getString;
- 
-import org.mybatis.generator.api.GeneratedJavaFile;
-import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.JavaFormatter;
-import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.ShellCallback;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
+
+import org.mybatis.generator.api.*;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
@@ -87,26 +80,36 @@ public class MapperPlugin extends PluginAdapter{
     	
     	//创建Select查询
         XmlElement select = new XmlElement("select");
-        select.addAttribute(new Attribute("id", "selectAll"));
+        select.addAttribute(new Attribute("id", "selectByMap"));
         select.addAttribute(new Attribute("resultMap", "BaseResultMap"));
-        select.addAttribute(new Attribute("parameterType", introspectedTable.getBaseRecordType()));
+        //select.addAttribute(new Attribute("parameterType", introspectedTable.getBaseRecordType()));
+        select.addAttribute(new Attribute("parameterType", "java.util.Map"));
         select.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
 
-        select.addElement(new XmlElement("where"));
+        XmlElement where=new XmlElement("where");
+        List<IntrospectedColumn> allColumns = introspectedTable.getAllColumns();
+        for (IntrospectedColumn column:allColumns){
+            if (column.getJdbcTypeName().equals("VARCHAR")){
+                XmlElement ifNotNull=new XmlElement("if");
+                ifNotNull.addAttribute(new Attribute("test",column.getJavaProperty()+" != null"));
+                ifNotNull.addElement(new TextElement("AND "+column.getActualColumnName()+" like #{"+column.getJavaProperty()+"}"));
+                where.addElement(ifNotNull);
+            }else if(column.getJdbcTypeName().equals("TIMESTAMP")){
+                XmlElement ifNotNull=new XmlElement("if");
+                ifNotNull.addAttribute(new Attribute("test",column.getJavaProperty()+" != null"));
+                ifNotNull.addElement(new TextElement("AND "+column.getActualColumnName()+" &gt;= #{"+column.getJavaProperty()+"StartTime}"));
+                where.addElement(ifNotNull);
 
+                XmlElement ifNotNull1=new XmlElement("if");
+                ifNotNull1.addAttribute(new Attribute("test",column.getJavaProperty()+" != null"));
+                ifNotNull1.addElement(new TextElement("AND "+column.getActualColumnName()+" &lt;= #{"+column.getJavaProperty()+"EndTime}"));
+                where.addElement(ifNotNull1);
+            }
 
-
-
-
-        XmlElement queryPage = new XmlElement("select");
-        queryPage.addAttribute(new Attribute("id", "queryPage"));
-        queryPage.addAttribute(new Attribute("resultMap", "BaseResultMap"));
-        queryPage.addAttribute(new Attribute("parameterType", "com.fendo.bean.Page"));
-        queryPage.addElement(new TextElement("select * from "+ introspectedTable.getFullyQualifiedTableNameAtRuntime()));
-        
+        }
+        select.addElement(where);
         XmlElement parentElement = document.getRootElement();
         parentElement.addElement(select);
-        parentElement.addElement(queryPage);
         return super.sqlMapDocumentGenerated(document, introspectedTable);
     }
  
@@ -168,6 +171,14 @@ public class MapperPlugin extends PluginAdapter{
         }
         return mapperJavaFiles;
     }
-	
+
+    //添加注释
+    public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+        if(!"".equals(introspectedColumn.getRemarks())&&introspectedColumn.getRemarks()!=null){
+            field.addAnnotation("//"+introspectedColumn.getRemarks());
+        }
+        return true;
+    }
+
 }
 
